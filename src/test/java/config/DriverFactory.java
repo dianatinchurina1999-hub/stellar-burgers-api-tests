@@ -20,6 +20,7 @@ public class DriverFactory {
             }
             options.setBinary(yandexBinary);
 
+
             String yandexMajor = System.getProperty("yandexMajor", "142");
 
             WebDriverManager.chromedriver()
@@ -35,4 +36,5 @@ public class DriverFactory {
         return new ChromeDriver(options);
     }
 }
+
 

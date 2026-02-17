@@ -62,6 +62,20 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- REST Assured для создания/удаления пользователя по API -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.4.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Allure интеграция с REST Assured (request/response в отчёте) -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>io.qameta.allure</groupId>

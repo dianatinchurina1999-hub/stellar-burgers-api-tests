@@ -1,7 +1,7 @@
 package tests;
 
 import config.DriverFactory;
-import io.qameta.allure.Attachment;
+import io.qameta.allure.Allure;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -9,9 +9,13 @@ import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.openqa.selenium.*;
 
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
+
 public abstract class BaseUiTest {
 
     protected WebDriver driver;
+    protected final String uiBaseUrl = System.getProperty("uiBaseUrl", "https://stellarburgers.education-services.ru/");
 
     @Rule
     public TestWatcher watcher = new TestWatcher() {
@@ -25,7 +29,7 @@ public abstract class BaseUiTest {
     @Before
     public void setUp() {
         driver = DriverFactory.create();
-        driver.get("https://stellarburgers.education-services.ru/");
+        driver.get(uiBaseUrl);
     }
 
     @After
@@ -35,21 +39,20 @@ public abstract class BaseUiTest {
         }
     }
 
-    @Attachment(value = "Screenshot", type = "image/png")
-    public byte[] attachScreenshot() {
+    protected void attachScreenshot() {
         try {
-            return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        } catch (Exception ex) {
-            return new byte[0];
+            byte[] bytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            Allure.addAttachment("Screenshot", new ByteArrayInputStream(bytes));
+        } catch (Exception ignored) {
         }
     }
 
-    @Attachment(value = "Page source", type = "text/html")
-    public String attachPageSource() {
+    protected void attachPageSource() {
         try {
-            return driver.getPageSource();
-        } catch (Exception ex) {
-            return "Cannot get page source: " + ex.getMessage();
+            String html = driver.getPageSource();
+            Allure.addAttachment("Page source", "text/html",
+                    new ByteArrayInputStream(html.getBytes(StandardCharsets.UTF_8)), ".html");
+        } catch (Exception ignored) {
         }
     }
 }

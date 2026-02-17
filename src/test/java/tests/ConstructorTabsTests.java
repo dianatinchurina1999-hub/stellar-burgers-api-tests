@@ -8,14 +8,25 @@ import static org.junit.Assert.assertTrue;
 public class ConstructorTabsTests extends BaseUiTest {
 
     @Test
-    public void constructorTabs_shouldSwitch() {
+    public void bunsTabShouldOpen() {
         MainPage main = new MainPage(driver);
 
+        assertTrue("Должна быть активна вкладка 'Булки'", main.isBunsTabActive());
+    }
+
+    @Test
+    public void saucesTabShouldOpen() {
+        MainPage main = new MainPage(driver);
         main.clickSauces();
+        assertTrue("Должна быть активна вкладка 'Соусы'", main.isSaucesTabActive());
+    }
+
+    @Test
+    public void fillingsTabShouldOpen() {
+        MainPage main = new MainPage(driver);
         main.clickFillings();
-        main.clickBuns();
-
-
-        assertTrue(driver.getCurrentUrl().contains("stellarburgers.education-services.ru"));
+        assertTrue("Должна быть активна вкладка 'Начинки'", main.isFillingsTabActive());
     }
 }
+
+
