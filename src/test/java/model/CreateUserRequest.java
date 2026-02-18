@@ -11,3 +11,4 @@ public class CreateUserRequest {
         this.name = name;
     }
 }
+

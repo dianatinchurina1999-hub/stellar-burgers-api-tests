@@ -84,7 +84,7 @@
                 <configuration>
                     <testFailureIgnore>false</testFailureIgnore>
 
-                    <!-- ВАЖНО: без @{argLine} -->
+
                     <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
 
                     <properties>
