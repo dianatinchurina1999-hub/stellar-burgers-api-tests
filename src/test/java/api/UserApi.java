@@ -53,7 +53,7 @@ public class UserApi {
                     .post("/auth/register");
 
             int code = resp.getStatusCode();
-            
+
             if (code == 200 || code == 403) {
                 return resp;
             }
